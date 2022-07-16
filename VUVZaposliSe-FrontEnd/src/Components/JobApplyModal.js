@@ -7,7 +7,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import { Stack } from "@mui/material";
-
+import FileUpload from "react-material-file-upload";
 const style = {
   position: "absolute",
   top: "50%",
@@ -15,7 +15,6 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: 500,
   bgcolor: "background.paper",
-  border: "2px solid #000",
   boxShadow: 24,
   p: 4,
 };
@@ -24,7 +23,7 @@ export default function JobApplyModal() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
+  const [files, setFiles] = React.useState([]);
   return (
     <div
       style={{
@@ -60,37 +59,47 @@ export default function JobApplyModal() {
         <Fade in={open}>
           <Box sx={style}>
             <Typography id="transition-modal-title" variant="h4" component="h2">
-              Text in a modal
+              Prijavnica za posao
             </Typography>
             <Typography
               id="transition-modal-description"
               variant="h6"
               sx={{ mt: 2 }}
             >
-              Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+              Vaši podaci koji se šalju poslodavcu
             </Typography>
             <Stack sx={{ mt: 3 }} spacing={2}>
               <TextField
+                inputProps={{ style: { fontSize: "0.8vw" } }}
+                InputLabelProps={{ style: { fontSize: "0.8vw" } }}
                 required
                 id="filled-required"
                 label="Ime"
                 defaultValue="Hello World"
-                variant="filled"
+                variant="standard"
               />
               <TextField
+                inputProps={{ style: { fontSize: "0.8vw" } }}
+                InputLabelProps={{ style: { fontSize: "0.8vw" } }}
                 required
                 id="filled-required"
                 label="Prezime"
                 defaultValue="Hello World"
-                variant="filled"
+                variant="standard"
               />
               <TextField
+                inputProps={{ style: { fontSize: "0.8vw" } }}
+                InputLabelProps={{ style: { fontSize: "0.8vw" } }}
                 required
                 id="filled-required"
                 label="Adresa"
                 defaultValue="Hello World"
-                variant="filled"
+                variant="standard"
               />
+              <Typography variant="h6" style={{ marginTop: "4%" }}>
+                Unesite Vaš CV
+              </Typography>
+              <FileUpload value={files} onChange={setFiles} />
             </Stack>
             <Stack
               direction="row"
@@ -99,6 +108,7 @@ export default function JobApplyModal() {
               sx={{ mt: 4 }}
             >
               <Button
+                onClick={handleClose}
                 variant="contained"
                 style={{ color: "white", background: "gray" }}
               >
