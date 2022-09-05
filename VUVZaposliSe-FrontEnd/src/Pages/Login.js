@@ -114,10 +114,12 @@ function Login() {
                       display: "flex",
                       margin: "0 auto",
                       marginTop: "20%",
+                      textTransform: "none",
+                      fontSize: "0.7vw",
                     }}
                     onClick={AutentikacijaKorisnika}
                   >
-                    Prijavi se putem NIAS
+                    Prijavi se putem AAI@Edu.hr
                   </Button>
                 </Grid>
               </Grid>

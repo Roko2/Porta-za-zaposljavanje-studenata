@@ -19,11 +19,6 @@ namespace Bill.Managers
         {
             _dbContext = dbContext;
         }
-
-        public FavoritManager()
-        {
-
-        }
         public async Task<List<FavoritDTO>> DohvatiPosloveFavoriteKorisnika(int korisnikId)
         {
             try

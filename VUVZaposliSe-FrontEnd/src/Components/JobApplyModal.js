@@ -21,7 +21,16 @@ const style = {
 
 export default function JobApplyModal() {
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
+  const [ime, setIme] = React.useState(null);
+  const [prezime, setPrezime] = React.useState(null);
+  const [adresa, setAdresa] = React.useState(null);
+  const handleOpen = () => {
+    let user = JSON.parse(localStorage.getItem("data")).user;
+    setIme(user.given_name);
+    setPrezime(user.family_name);
+    setAdresa(user.address.locality);
+    setOpen(true);
+  };
   const handleClose = () => setOpen(false);
   const [files, setFiles] = React.useState([]);
   return (
@@ -73,27 +82,27 @@ export default function JobApplyModal() {
                 inputProps={{ style: { fontSize: "0.8vw" } }}
                 InputLabelProps={{ style: { fontSize: "0.8vw" } }}
                 required
-                id="filled-required"
+                id="inptIme"
+                value={ime}
                 label="Ime"
-                defaultValue="Hello World"
                 variant="standard"
               />
               <TextField
                 inputProps={{ style: { fontSize: "0.8vw" } }}
                 InputLabelProps={{ style: { fontSize: "0.8vw" } }}
                 required
-                id="filled-required"
+                id="inptPrezime"
                 label="Prezime"
-                defaultValue="Hello World"
+                value={prezime}
                 variant="standard"
               />
               <TextField
                 inputProps={{ style: { fontSize: "0.8vw" } }}
                 InputLabelProps={{ style: { fontSize: "0.8vw" } }}
                 required
-                id="filled-required"
+                id="inptAdresa"
                 label="Adresa"
-                defaultValue="Hello World"
+                value={adresa}
                 variant="standard"
               />
               <Typography variant="h6" style={{ marginTop: "4%" }}>

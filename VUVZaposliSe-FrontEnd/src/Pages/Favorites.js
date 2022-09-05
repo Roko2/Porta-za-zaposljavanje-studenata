@@ -22,24 +22,31 @@ function Favorites() {
   }, []);
   if (data != null && data.length > 0) {
     return (
-      <Grid
-        container
-        justifyContent="center"
-        alignItems="center"
-        style={{ marginTop: "2%" }}
-      >
-        {data.map((posao, index) => (
-          <Grid key={index} item xs={4}>
-            <JobCard
-              key={posao.posaoId}
-              jobId={posao.posaoId}
-              label={posao.naziv}
-              details={posao.opis}
-              employerId={posao.poslodavac.id}
-            ></JobCard>
-          </Grid>
-        ))}
-      </Grid>
+      <>
+        <Typography variant="h3" sx={{ mx: "auto", mt: 2 }}>
+          Poslovi favoriti
+        </Typography>
+        <Grid
+          container
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+          style={{ marginTop: "2%", paddingLeft: "5%" }}
+          spacing={2}
+        >
+          {data.map((posao, index) => (
+            <Grid key={index} item xs={4}>
+              <JobCard
+                key={posao.posaoId}
+                jobId={posao.posaoId}
+                label={posao.naziv}
+                details={posao.opis}
+                employerId={posao.poslodavac.id}
+              ></JobCard>
+            </Grid>
+          ))}
+        </Grid>
+      </>
     );
   } else if (data != null && data.length == 0) {
     return (

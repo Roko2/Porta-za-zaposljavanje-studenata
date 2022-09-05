@@ -22,7 +22,12 @@ function TextFieldInput() {
 
   return (
     <Paper
-      sx={{ p: "2px 4px", display: "flex", alignItems: "center", width: 400 }}
+      sx={{
+        p: "2px 4px",
+        display: "flex",
+        alignItems: "center",
+        width: "25vw",
+      }}
     >
       <InputBase
         id="searchQuery"
