@@ -425,3 +425,17 @@ svg #main-circ {
 #googleMap {
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
+.MuiCircularProgress-indeterminate {
+  animation: circular-rotate 1.4s linear infinite !important;
+}
+
+@keyframes circular-rotate {
+  0% {
+    transform: rotate(0deg) !important;
+    /* Fix IE11 wobbly */
+    transform-origin: 50% 50% !important;
+  }
+  100% {
+    transform: rotate(360deg) !important;
+  }
+}

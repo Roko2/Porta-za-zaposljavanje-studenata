@@ -1,4 +1,4 @@
-import { Grid, Box } from "@material-ui/core";
+import { Grid, Box, CircularProgress } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import "react-image-gallery/styles/css/image-gallery.css";
 import { Typography } from "@material-ui/core";
@@ -101,11 +101,25 @@ function Home() {
         <Typography variant="h4" align="left">
           Istražite kategorije
         </Typography>
-        {kategorije && <AllCategories {...allCategoriesProps} />}
+        {kategorije == null ? (
+          <LinearProgress sx={{ mt: 2 }} />
+        ) : (
+          <AllCategories {...allCategoriesProps} />
+        )}
         <Typography variant="h4" align="left" style={{ marginTop: "2%" }}>
           Top 3 kategorije
         </Typography>
-        {kategorijePoslovi && <JobCards items={kategorijePoslovi} />}
+        {kategorijePoslovi == null ? (
+          <Box textAlign="center">
+            <CircularProgress
+              style={{
+                marginTop: "2%",
+              }}
+            />
+          </Box>
+        ) : (
+          <JobCards items={kategorijePoslovi} />
+        )}
       </div>
       <ScrollButton />
     </>

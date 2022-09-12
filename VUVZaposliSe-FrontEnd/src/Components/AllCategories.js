@@ -3,6 +3,7 @@ import MainStyle from "../Style/MainStyle";
 import Button from "@mui/material/Button";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { LinearProgress } from "@mui/material";
 
 function AllCategories({ align, items, space }) {
   const classes = MainStyle();
