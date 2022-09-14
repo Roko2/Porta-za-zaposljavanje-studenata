@@ -4,4 +4,5 @@ export const ClearLocalStorageSearch = () => {
   localStorage.setItem("kategorije", "");
   localStorage.setItem("poslodavci", "");
   localStorage.setItem("grad", "");
+  localStorage.setItem("preference", []);
 };

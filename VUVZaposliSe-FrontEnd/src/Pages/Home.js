@@ -26,7 +26,7 @@ function Home() {
         setKategorije(res);
       })
       .catch((err) => console.error(err));
-    fetch("https://localhost:7137/KategorijePoslovi")
+    fetch("https://localhost:7137/ReferentneKategorijePoslovi")
       .then((res) => res.json())
       .then((res) => {
         setKategorijePoslovi(res);
@@ -54,6 +54,7 @@ function Home() {
       var data = { user: decodedUser, signature: decodedSignature };
       if (decodedUser.nonce == tempKey) {
         localStorage.setItem("data", JSON.stringify(data));
+        localStorage.setItem("preference", []);
         var userToAdd = JSON.parse(localStorage.getItem("data"));
         userToAdd = userToAdd.user;
         let korisnik = {

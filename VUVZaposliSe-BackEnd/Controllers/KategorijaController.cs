@@ -39,12 +39,20 @@ namespace VUVZaposliSe_BackEnd.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        [HttpGet("KategorijePoslovi")]
-        public async Task<IActionResult> DohvatiNasumicneKategorijeIPoslove()
+        [HttpGet("ReferentneKategorijePoslovi")]
+        public async Task<IActionResult> DohvatiReferentneKategorijeIPoslove([FromQuery] List<int> kategorijeIds)
         {
             try
             {
-                List<Tuple<KategorijaDTO,List<PosaoDTO>>> kategorijaPoslovi = await _kategorijaManager.DohvatiNasumicneKategorijeIPoslove();
+                List<Tuple<KategorijaDTO, List<PosaoDTO>>> kategorijaPoslovi = new();
+                if (kategorijeIds == null)
+                {
+                    kategorijaPoslovi = await _kategorijaManager.DohvatiNasumicneKategorijeIPoslove();
+                }
+                else
+                {
+                    kategorijaPoslovi = await _kategorijaManager.DohvatiReferenciraneKategorijePoslove(kategorijeIds);
+                }
                 return Ok(kategorijaPoslovi);
             }
             catch (Exception ex)

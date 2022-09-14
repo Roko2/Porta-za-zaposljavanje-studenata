@@ -8,6 +8,7 @@ import metro_7 from "../Images/metro_7.webp";
 import burgerking_8 from "../Images/burgerking_8.png";
 import tifon_9 from "../Images/tifon_9.jpg";
 import roto_10 from "../Images/roto_10.png";
+import admincentar_11 from "../Images/admincentar_11.webp";
 export const ImageFinder = (employerId) => {
   let images = [
     "fina_1",
@@ -20,6 +21,7 @@ export const ImageFinder = (employerId) => {
     "burgerking_8",
     "tifon_9",
     "roto_10",
+    "admincentar_11",
   ];
   let slika;
   images.forEach((element) => {
@@ -55,6 +57,9 @@ export const ImageFinder = (employerId) => {
           break;
         case "roto_10":
           slika = roto_10;
+          break;
+        case "admincentar_11":
+          slika = admincentar_11;
           break;
         default:
           break;

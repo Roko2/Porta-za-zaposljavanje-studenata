@@ -3,6 +3,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
+import { ChoiceRemember } from "../Shared/ChoiceRemember";
 import {
   Button,
   CardActionArea,
@@ -43,6 +44,7 @@ function JobCard({ label, details, employerId, jobId }) {
           color="primary"
           sx={{ ml: "auto" }}
           key={jobId}
+          onClick={ChoiceRemember(jobId)}
           to={`/singlejob/${jobId}`}
         >
           Detalji
