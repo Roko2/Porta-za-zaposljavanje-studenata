@@ -8,16 +8,14 @@ import SearchIcon from "@mui/icons-material/Search";
 import DirectionsIcon from "@mui/icons-material/Directions";
 import MainStyle from "../Style/MainStyle";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 function TextFieldInput() {
+  const [inputValue, setInputValue] = useState("");
   const classes = MainStyle();
   const navigate = useNavigate();
   const SearchPage = () => {
-    navigate("/jobads", {
-      state: {
-        naziv: document.getElementById("searchQuery").value,
-      },
-    });
+    navigate("/jobads");
   };
 
   return (
@@ -30,9 +28,11 @@ function TextFieldInput() {
       }}
     >
       <InputBase
+        onChange={(e) => setInputValue(e.target.value)}
         id="searchQuery"
         sx={{ ml: 1, flex: 1 }}
         placeholder="Pretraga"
+        value={inputValue}
         inputProps={{ "aria-label": "pretraga" }}
       />
       <IconButton

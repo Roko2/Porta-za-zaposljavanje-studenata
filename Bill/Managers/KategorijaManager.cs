@@ -94,12 +94,12 @@ namespace Bill.Managers
                     Random rand = new();
                     List<PosaoDTO> poslovi = new();
                     List<KategorijaDTO> kategorije = await DohvatiSveKategorije();
-                    List<int> kategorijeIds = kategorije.Where(x=>x.Id != brojKategorija.First().Name).Select(x => x.Id).ToList();
+                    List<int> kategorijeIds = kategorije.Where(x => x.Id != brojKategorija.First().Name).Select(x => x.Id).ToList();
                     List<int> nasumicnoOdabraneKategorije = new();
                     int randomKategorijaId;
 
                     poslovi.AddRange(await _posaoManager.DohvatiSvePoslovePoKategoriji(brojKategorija.First().Name));
-                    kategorijePoslovi.Add(Tuple.Create(await DohvatiKategorijuPoId(brojKategorija.First().Name), poslovi));
+                    kategorijePoslovi.Add(Tuple.Create(await DohvatiKategorijuPoId(brojKategorija.First().Name), poslovi.ToList()));
 
                     for (int i = 0; i < 2; i++)
                     {
@@ -109,31 +109,39 @@ namespace Bill.Managers
                         } while (nasumicnoOdabraneKategorije.Contains(randomKategorijaId));
                         nasumicnoOdabraneKategorije.Add(randomKategorijaId);
                         poslovi.AddRange(await _posaoManager.DohvatiSvePoslovePoKategoriji(randomKategorijaId));
-                        kategorijePoslovi.Add(Tuple.Create(await DohvatiKategorijuPoId(randomKategorijaId), poslovi));
+                        kategorijePoslovi.Add(Tuple.Create(await DohvatiKategorijuPoId(randomKategorijaId), poslovi.ToList()));
+                        poslovi.Clear();
                     }
+                    kategorijePoslovi.OrderByDescending(x => x.Item2);
                 }
                 else if (brojKategorija.Count() == 2)
                 {
                     List<PosaoDTO> poslovi = new();
                     List<KategorijaDTO> kategorije = await DohvatiSveKategorije();
-                    foreach(var kategorija in brojKategorija)
+                    foreach (var kategorija in brojKategorija)
                     {
                         poslovi.AddRange(await _posaoManager.DohvatiSvePoslovePoKategoriji(kategorija.Name));
-                        kategorijePoslovi.Add(Tuple.Create(await DohvatiKategorijuPoId(kategorija.Name), poslovi));
+                        kategorijePoslovi.Add(Tuple.Create(await DohvatiKategorijuPoId(kategorija.Name), poslovi.ToList()));
+                        poslovi.Clear();
                     }
 
                     var kategorijaIdKojaNijeOdabrana = kategorije.Where(x => !brojKategorija.Select(y => y.Name).ToList().Contains(x.Id)).First().Id;
-                    poslovi.AddRange(await _posaoManager.DohvatiSvePoslovePoKategoriji(kategorijaIdKojaNijeOdabrana));
-                    kategorijePoslovi.Add(Tuple.Create(await DohvatiKategorijuPoId(kategorijaIdKojaNijeOdabrana), poslovi));
+                    kategorijePoslovi.Add(Tuple.Create(await DohvatiKategorijuPoId(kategorijaIdKojaNijeOdabrana), await _posaoManager.DohvatiSvePoslovePoKategoriji(kategorijaIdKojaNijeOdabrana)));
+                    kategorijePoslovi.OrderByDescending(x => x.Item2);
                 }
                 else
                 {
                     List<PosaoDTO> poslovi = new();
-                    foreach (var item in brojKategorija)
+                    foreach (var item in brojKategorija.Select((value, index) => (index, value)))
                     {
-                        poslovi.AddRange(await _posaoManager.DohvatiSvePoslovePoKategoriji(item.Name));
-                        kategorijePoslovi.Add(Tuple.Create(await DohvatiKategorijuPoId(item.Name), poslovi));
+                        if (item.index < 3)
+                        {
+                            poslovi.AddRange(await _posaoManager.DohvatiSvePoslovePoKategoriji(item.value.Name));
+                            kategorijePoslovi.Add(Tuple.Create(await DohvatiKategorijuPoId(item.value.Name), poslovi.ToList()));
+                            poslovi.Clear();
+                        }
                     }
+                    kategorijePoslovi.OrderByDescending(x => x.Item2);
                 }
 
                 return kategorijePoslovi;
@@ -141,6 +149,18 @@ namespace Bill.Managers
             catch (Exception ex)
             {
                 throw new Exception("Dogodila se greška prilikom dohvata referenciranih kategorija i njihovih poslova!", ex);
+            }
+        }
+
+        public async Task<int> DohvatiKategorijuIdPoPosaoId(int posaoId)
+        {
+            try
+            {
+                return await KategorijaQueries.DohvatiKategorijuIdPoPosaoIdDB(_dbContext, posaoId);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Dogodila se greška prilikom dohvaćanja kategorije po ID!", ex);
             }
         }
     }

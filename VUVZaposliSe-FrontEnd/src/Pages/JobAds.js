@@ -15,10 +15,7 @@ function JobAds() {
         <Filters func={getParams} />
       </Grid>
       <Grid item xs={10} textAlign="center">
-        <JobSearchResults
-          searchTextQuery={location.state != null ? location.state : null}
-          params={params}
-        />
+        <JobSearchResults params={params} />
       </Grid>
     </Grid>
   );

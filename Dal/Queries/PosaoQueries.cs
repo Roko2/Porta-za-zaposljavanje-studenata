@@ -88,7 +88,7 @@ namespace Dal.Queries
                 }
                 if (svojstva.Naziv != null && svojstva.Naziv != "undefined" && svojstva.Naziv != "")
                 {
-                    poslovi = poslovi.Where(x => x.Naziv.Trim().ToLower().Contains(svojstva.Naziv.Trim().ToLower()) || x.Opis.Contains(svojstva.Naziv)).ToList();
+                    poslovi = poslovi.Where(x => x.Naziv.Trim().ToLower().Contains(svojstva.Naziv.Trim().ToLower()) || x.Opis.Trim().ToLower().Contains(svojstva.Naziv.Trim().ToLower())).ToList();
                 }
 
                 if (svojstva.Vjestine != null && svojstva.Vjestine.Any())

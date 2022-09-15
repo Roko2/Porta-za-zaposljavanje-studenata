@@ -47,7 +47,9 @@ function SingleJobHeader(job) {
           spacing={{ xs: 5, sm: 4, md: 2.5, xxl: 2 }}
         >
           <Typography className="jobHeaderText">
-            {job.datumAktivnosti}
+            {job.aktivan != null
+              ? job.datumAktivnosti
+              : "Oglas više nije aktivan"}
           </Typography>
           <Typography className="jobHeaderText">{job.lokacija}</Typography>
           <Typography className="jobHeaderText">{job.brojRadnika}</Typography>

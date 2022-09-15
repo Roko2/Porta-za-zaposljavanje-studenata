@@ -33,5 +33,16 @@ namespace Dal.Queries
                 throw new Exception("Dogodila se greška prilikom dohvata kategorije po ID na razini baze!", ex);
             }
         }
+        public static async Task<int> DohvatiKategorijuIdPoPosaoIdDB(AppDbContext dbContext, int posaoId)
+        {
+            try
+            {
+                return await dbContext.Poslovi.Where(x => x.PosaoId == posaoId).Select(x => x.Kategorija.KategorijaId).FirstAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Dogodila se greška prilikom dohvata kategorije ID po posao ID na razini baze!", ex);
+            }
+        }
     }
 }

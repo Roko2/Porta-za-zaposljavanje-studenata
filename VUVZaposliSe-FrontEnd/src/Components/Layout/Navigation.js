@@ -10,6 +10,15 @@ import MainStyle from "../../Style/MainStyle";
 import * as React from "react";
 import Image from "../Image";
 import navbarIcon from "../../Images/navbarIcon.png";
+
+import {
+  createTheme,
+  responsiveFontSizes,
+  ThemeProvider,
+} from "@mui/material/styles";
+
+let theme = createTheme();
+theme = responsiveFontSizes(theme);
 function Navigation() {
   const classes = MainStyle();
   const [isNavExpanded, setIsNavExpanded] = useState(false);
@@ -51,7 +60,10 @@ function Navigation() {
           >
             <Image {...imageProps} />
           </IconButton>
-          <Typography style={{ marginRight: 25 }} variant="h4" component="div">
+          <Typography
+            style={{ marginRight: 25, fontSize: "1.5vw" }}
+            component="div"
+          >
             Zaposli se
           </Typography>
           <Stack direction="row" spacing={2} sx={{ ml: 2 }}>

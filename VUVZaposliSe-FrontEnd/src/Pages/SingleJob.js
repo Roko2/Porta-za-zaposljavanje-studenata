@@ -11,11 +11,13 @@ import { CheckRoute } from "../Shared/CheckRoute";
 import Favorite from "../Components/Favorite";
 import { Button, Stack, Tooltip } from "@mui/material";
 import JobApplyModal from "../Components/JobApplyModal";
+import { ChoiceRemember } from "../Shared/ChoiceRemember";
 function SingleJob() {
   CheckRoute();
   const [job, setJob] = useState(null);
   useEffect(() => {
     let jobId = window.location.pathname.split("/").pop();
+    ChoiceRemember(jobId);
     fetch("https://localhost:7137/Poslovi/" + jobId)
       .then((res) => res.json())
       .then((res) => {

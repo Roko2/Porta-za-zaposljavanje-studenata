@@ -45,7 +45,7 @@ namespace VUVZaposliSe_BackEnd.Controllers
             try
             {
                 List<Tuple<KategorijaDTO, List<PosaoDTO>>> kategorijaPoslovi = new();
-                if (kategorijeIds == null)
+                if (kategorijeIds == null || kategorijeIds.Count() == 0)
                 {
                     kategorijaPoslovi = await _kategorijaManager.DohvatiNasumicneKategorijeIPoslove();
                 }
@@ -54,6 +54,20 @@ namespace VUVZaposliSe_BackEnd.Controllers
                     kategorijaPoslovi = await _kategorijaManager.DohvatiReferenciraneKategorijePoslove(kategorijeIds);
                 }
                 return Ok(kategorijaPoslovi);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("KategorijaPosla/{posaoId}")]
+        public async Task<IActionResult> DohvatiKategorijuIdPoPosaoId(int posaoId)
+        {
+            try
+            {
+                var kategorijaId = await _kategorijaManager.DohvatiKategorijuIdPoPosaoId(posaoId);
+                return Ok(kategorijaId);
             }
             catch (Exception ex)
             {

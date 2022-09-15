@@ -10,6 +10,7 @@ import { CheckRoute } from "../Shared/CheckRoute";
 import ScrollButton from "../Components/Layout/ScrollButton";
 import { Button } from "@mui/material";
 import LinearProgress from "@mui/material/LinearProgress";
+import { FormatStringArrayApi } from "../Shared/FormatStringArrayApi";
 function Home() {
   CheckRoute();
   const [kategorijePoslovi, setKategorijePoslovi] = useState(null);
@@ -20,13 +21,20 @@ function Home() {
     items: kategorije,
   };
   useEffect(() => {
+    let preference = FormatStringArrayApi(
+      "kategorijeIds",
+      JSON.stringify(localStorage.getItem("preference").split(","))
+    );
     fetch("https://localhost:7137/Kategorije")
       .then((res) => res.json())
       .then((res) => {
         setKategorije(res);
       })
       .catch((err) => console.error(err));
-    fetch("https://localhost:7137/ReferentneKategorijePoslovi")
+    fetch(
+      "https://localhost:7137/ReferentneKategorijePoslovi?kategorijeIds=" +
+        preference
+    )
       .then((res) => res.json())
       .then((res) => {
         setKategorijePoslovi(res);
@@ -54,7 +62,6 @@ function Home() {
       var data = { user: decodedUser, signature: decodedSignature };
       if (decodedUser.nonce == tempKey) {
         localStorage.setItem("data", JSON.stringify(data));
-        localStorage.setItem("preference", []);
         var userToAdd = JSON.parse(localStorage.getItem("data"));
         userToAdd = userToAdd.user;
         let korisnik = {

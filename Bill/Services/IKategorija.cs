@@ -13,5 +13,6 @@ namespace Bill.Services
         Task<KategorijaDTO> DohvatiKategorijuPoId(int kategorijaId);
         Task<List<Tuple<KategorijaDTO, List<PosaoDTO>>>> DohvatiNasumicneKategorijeIPoslove();
         Task<List<Tuple<KategorijaDTO,List<PosaoDTO>>>> DohvatiReferenciraneKategorijePoslove(List<int> kategorijeId);
+        Task<int> DohvatiKategorijuIdPoPosaoId(int posaoId);
     }
 }

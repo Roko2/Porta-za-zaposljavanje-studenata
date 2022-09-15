@@ -5,9 +5,13 @@ import JobCard from "./JobCard";
 import { FormatStringArrayApi } from "../Shared/FormatStringArrayApi";
 import JobCardPagination from "./JobCardPagination";
 import SweetPagination from "sweetpagination";
-function JobSearchResults({ searchTextQuery, params }) {
+function JobSearchResults({ params }) {
   const [searchResult, setSearchResult] = useState(null);
   const [currentPageData, setCurrentPageData] = useState(new Array(2).fill());
+  const [inputQuery, setInputQuery] = useState("");
+  useEffect(() => {
+    setInputQuery(document.getElementById("searchQuery").value);
+  });
   useEffect(
     () => {
       let vjestine = [];
@@ -24,7 +28,6 @@ function JobSearchResults({ searchTextQuery, params }) {
         localStorage.setItem("pogodnosti", pogodnosti);
       }
       if (params.selectType == JobAdditionalsEnum.kategorije) {
-        console.log(params.data);
         if (params.data != null && params.data.length > 0) {
           kategorije = FormatStringArrayApi("Kategorije", params.data);
           localStorage.setItem("kategorije", kategorije);
@@ -40,7 +43,7 @@ function JobSearchResults({ searchTextQuery, params }) {
       }
       fetch(
         "https://localhost:7137/PosloviSearch?Naziv=" +
-          searchTextQuery?.naziv +
+          document.getElementById("searchQuery").value +
           "&GradId=" +
           localStorage.getItem("grad") +
           "&" +
@@ -55,13 +58,11 @@ function JobSearchResults({ searchTextQuery, params }) {
         .then((res) => res.json())
         .then((res) => {
           setSearchResult(res);
-          document.getElementById("searchQuery").value =
-            searchTextQuery?.naziv == undefined ? "" : searchTextQuery?.naziv;
         })
         .catch((err) => console.error(err));
     },
 
-    Object.values({ ...searchTextQuery, ...params })
+    Object.values({ inputQuery, ...params })
   );
   if (searchResult && searchResult.length > 0) {
     return (
