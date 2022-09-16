@@ -52,7 +52,7 @@ export default function AccountMenu() {
       setUserInitials(
         userData.given_name.charAt(0) + userData.family_name.charAt(0)
       );
-    }, 200);
+    }, 500);
   }, []);
   return (
     <React.Fragment>

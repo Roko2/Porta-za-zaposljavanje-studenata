@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Typography, Button } from "@mui/material";
 import MainStyle from "../Style/MainStyle";
 import { Grid } from "@material-ui/core";
@@ -7,7 +7,6 @@ import loginMainImage from "../Images/loginMainImage.png";
 import loginMainImageIcon from "../Images/loginMainImageIcon.png";
 import loginButtonIcon from "../Images/loginButtonIcon.png";
 import { hashRandom } from "react-hash-string";
-import { UserManager } from "oidc-client";
 import { CheckRoute } from "../Shared/CheckRoute";
 function Login() {
   function AutentikacijaKorisnika() {

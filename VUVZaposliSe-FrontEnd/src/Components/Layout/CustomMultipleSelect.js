@@ -7,10 +7,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Chip from "@mui/material/Chip";
-import { Grid, Tooltip } from "@material-ui/core";
-import JobAds from "../../Pages/JobAds";
-import { useNavigate } from "react-router-dom";
-import JobAdditionalsEnum from "../../Shared/JobAdditionalsEnum";
+import { Grid } from "@material-ui/core";
 function CustomMultipleSelect({
   color,
   label,
@@ -37,7 +34,6 @@ function CustomMultipleSelect({
     };
   }
   const theme = useTheme();
-  const navigate = useNavigate();
   const [personName, setPersonName] = React.useState([]);
   const handleChange = (event) => {
     const {

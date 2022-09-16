@@ -1,5 +1,5 @@
 import { Grid } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import Filters from "../Components/FIlters";
 import JobSearchResults from "../Components/JobSearchResults";

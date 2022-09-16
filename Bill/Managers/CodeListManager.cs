@@ -43,7 +43,6 @@ namespace Bill.Managers
             {
                 var lVjestineDB = await CodeListQueries.DohvatiVjestineDB(_dbContext);
                 var lVjestine = VjestinaTranslator.TranslateList(lVjestineDB);
-
                 return lVjestine;
             }
             catch (Exception ex)
@@ -57,7 +56,6 @@ namespace Bill.Managers
             {
                 var lPogodnostiDB = await CodeListQueries.DohvatiPogodnostiDB(_dbContext);
                 var lPogodnosti = PogodnostTranslator.TranslateList(lPogodnostiDB);
-
                 return lPogodnosti;
             }
             catch (Exception ex)

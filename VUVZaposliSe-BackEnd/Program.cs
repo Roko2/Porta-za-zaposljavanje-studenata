@@ -24,6 +24,7 @@ builder.Services.AddScoped<ICodeList, CodeListManager>();
 builder.Services.AddSingleton<IBackgroundTask, BackgroundJobTask>();
 builder.Services.AddHostedService<BackgroundJobDateMeasurer>();
 builder.Services.AddScoped<IFavorit, FavoritManager>();
+builder.Services.AddScoped<IEmailSender, EmailManager>();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: "originRules",

@@ -21,10 +21,12 @@ function Home() {
     items: kategorije,
   };
   useEffect(() => {
-    let preference = FormatStringArrayApi(
-      "kategorijeIds",
-      JSON.stringify(localStorage.getItem("preference").split(","))
-    );
+    let preference = !localStorage.getItem("preference")?.split(",")
+      ? ""
+      : FormatStringArrayApi(
+          "kategorijeIds",
+          JSON.stringify(localStorage.getItem("preference")?.split(","))
+        );
     fetch("https://localhost:7137/Kategorije")
       .then((res) => res.json())
       .then((res) => {

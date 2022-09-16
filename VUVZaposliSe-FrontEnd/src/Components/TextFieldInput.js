@@ -1,18 +1,13 @@
 import * as React from "react";
 import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
-import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
-import DirectionsIcon from "@mui/icons-material/Directions";
-import MainStyle from "../Style/MainStyle";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 function TextFieldInput() {
   const [inputValue, setInputValue] = useState("");
-  const classes = MainStyle();
   const navigate = useNavigate();
   const SearchPage = () => {
     navigate("/jobads");

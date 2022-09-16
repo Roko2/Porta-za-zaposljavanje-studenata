@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import JobAdditionalsEnum from "../Shared/JobAdditionalsEnum";
 import JobCard from "./JobCard";
 import { FormatStringArrayApi } from "../Shared/FormatStringArrayApi";
-import JobCardPagination from "./JobCardPagination";
 import SweetPagination from "sweetpagination";
 function JobSearchResults({ params }) {
   const [searchResult, setSearchResult] = useState(null);

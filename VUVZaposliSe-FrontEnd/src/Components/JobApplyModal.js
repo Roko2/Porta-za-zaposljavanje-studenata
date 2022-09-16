@@ -24,6 +24,7 @@ export default function JobApplyModal() {
   const [ime, setIme] = React.useState(null);
   const [prezime, setPrezime] = React.useState(null);
   const [adresa, setAdresa] = React.useState(null);
+  const [displayValidation, setDisplayValidation] = React.useState("none");
   const handleOpen = () => {
     let user = JSON.parse(localStorage.getItem("data")).user;
     setIme(user.given_name);
@@ -33,6 +34,29 @@ export default function JobApplyModal() {
   };
   const handleClose = () => setOpen(false);
   const [files, setFiles] = React.useState([]);
+
+  function ApplyForJob() {
+    //send job apply to mail, close modal, show pop up message about succesful job apply
+    if (files == null || files.length == 0) {
+      setDisplayValidation("block");
+    } else {
+      fetch(
+        "https://localhost:7137/PosaljiEmail?Primatelj=" +
+          da +
+          "&Predmet=" +
+          da +
+          "&Sadrzaj=" +
+          da
+      )
+        .then((res) => res.json())
+        .then((res) => {
+          setDisplayValidation("none");
+          setOpen("false");
+          //notifikacija da je poruka poslana
+        })
+        .catch((err) => console.error(err));
+    }
+  }
   return (
     <div
       style={{
@@ -109,6 +133,13 @@ export default function JobApplyModal() {
                 Unesite Vaš CV
               </Typography>
               <FileUpload value={files} onChange={setFiles} />
+              <Typography
+                variant="body1"
+                display={displayValidation}
+                sx={{ color: "red", mt: 1 }}
+              >
+                CV je obavezno polje
+              </Typography>
             </Stack>
             <Stack
               direction="row"
@@ -123,7 +154,11 @@ export default function JobApplyModal() {
               >
                 Odustani
               </Button>
-              <Button variant="contained" color="success">
+              <Button
+                variant="contained"
+                color="success"
+                onClick={() => ApplyForJob()}
+              >
                 Pošalji prijavu
               </Button>
             </Stack>
