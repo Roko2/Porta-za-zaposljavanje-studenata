@@ -10,7 +10,11 @@ function TextFieldInput() {
   const [inputValue, setInputValue] = useState("");
   const navigate = useNavigate();
   const SearchPage = () => {
-    navigate("/jobads");
+    navigate("/jobads", {
+      state: {
+        naziv: inputValue,
+      },
+    });
   };
 
   return (

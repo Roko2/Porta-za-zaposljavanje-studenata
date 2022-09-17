@@ -99,8 +99,8 @@ namespace Bill.Managers
                     int randomKategorijaId;
 
                     poslovi.AddRange(await _posaoManager.DohvatiSvePoslovePoKategoriji(brojKategorija.First().Name));
-                    kategorijePoslovi.Add(Tuple.Create(await DohvatiKategorijuPoId(brojKategorija.First().Name), poslovi.ToList()));
-
+                    kategorijePoslovi.Add(Tuple.Create(await DohvatiKategorijuPoId(brojKategorija.First().Name), poslovi.Take(3).ToList()));
+                    poslovi.Clear();        
                     for (int i = 0; i < 2; i++)
                     {
                         do

@@ -51,12 +51,11 @@ function Home() {
     if (localStorage.getItem("data") == null) {
       token = url.split("id_token=")[1];
     } else {
-      const sign = require("jwt-encode");
-      const jwt = sign(
-        JSON.parse(localStorage.getItem("data")).user,
-        JSON.parse(localStorage.getItem("data")).signature
-      );
-      token = jwt;
+      token = JSON.parse(localStorage.getItem("data"))?.signature;
+      if (token == null || token == undefined) {
+        localStorage.clear();
+        window.location.href = "https://localhost:3000/login";
+      }
     }
     if (token != undefined || token != "" || token != null) {
       let decodedUser = jwt_decode(token);
@@ -116,7 +115,7 @@ function Home() {
         ) : (
           <AllCategories {...allCategoriesProps} />
         )}
-        <Typography variant="h4" align="left" style={{ marginTop: "2%" }}>
+        <Typography variant="h4" align="left" style={{ marginTop: "5%" }}>
           Top 3 kategorije
         </Typography>
         {kategorijePoslovi == null ? (

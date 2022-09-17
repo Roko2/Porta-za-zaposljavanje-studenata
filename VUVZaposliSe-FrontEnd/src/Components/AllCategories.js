@@ -20,7 +20,7 @@ function AllCategories({ align, items, space }) {
       container
       style={{
         width: "100%",
-        marginTop: "2%",
+        marginTop: "1%",
         borderRadius: "5px",
       }}
       className="allCategoriesDiv"

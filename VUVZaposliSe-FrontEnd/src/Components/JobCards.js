@@ -1,12 +1,12 @@
-import { Grid, Typography } from "@material-ui/core";
+import { Box, Grid, Typography } from "@material-ui/core";
 import { Divider, Stack } from "@mui/material";
 import JobCard from "./JobCard";
 
 function JobCards({ items }) {
   return items.map((item, index) => (
-    <>
-      <Stack sx={{ mt: 2 }}>
-        <Typography style={{ fontSize: "1vw" }} key={index}>
+    <Box key={index + "34fseknmk"}>
+      <Stack sx={{ mt: 3 }}>
+        <Typography style={{ fontSize: "1.2vw", fontWeight: "bold" }}>
           {item.item1.naziv}
         </Typography>
         <Divider flexItem variant="fullWidth" />
@@ -32,7 +32,7 @@ function JobCards({ items }) {
           </Grid>
         ))}
       </Grid>
-    </>
+    </Box>
   ));
 }
 export default JobCards;
