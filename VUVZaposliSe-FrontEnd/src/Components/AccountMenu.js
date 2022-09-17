@@ -48,10 +48,14 @@ export default function AccountMenu() {
   }
   React.useEffect(() => {
     setTimeout(function () {
-      let userData = JSON.parse(localStorage.getItem("data")).user;
-      setUserInitials(
-        userData.given_name.charAt(0) + userData.family_name.charAt(0)
-      );
+      let userData = JSON.parse(localStorage.getItem("data"))?.user;
+      if (userData == null || userData == undefined) {
+        setUserInitials("XX");
+      } else {
+        setUserInitials(
+          userData.given_name.charAt(0) + userData.family_name.charAt(0)
+        );
+      }
     }, 500);
   }, []);
   return (

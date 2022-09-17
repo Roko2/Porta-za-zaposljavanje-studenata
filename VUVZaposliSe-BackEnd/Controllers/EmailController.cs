@@ -13,13 +13,12 @@ namespace VUVZaposliSe_BackEnd.Controllers
             _emailManager = emailManager;
         }
 
-        [HttpGet("PosaljiEmail")]
-        public async Task<IActionResult> PosaljiEmail(EmailPrivatniPodaci data)
+        [HttpPost("PosaljiEmail")]
+        public async Task<IActionResult> PosaljiEmail([FromForm]EmailPoruka data)
         {
             try
             {
-            var message = new EmailPoruka(data.Primatelj, data.Predmet, data.Sadrzaj);
-            await _emailManager.PosaljiEmail(message);
+            await _emailManager.PosaljiEmail(data);
             return Ok();
             }
             catch(Exception ex)

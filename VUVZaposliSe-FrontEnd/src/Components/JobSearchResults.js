@@ -4,13 +4,14 @@ import JobAdditionalsEnum from "../Shared/JobAdditionalsEnum";
 import JobCard from "./JobCard";
 import { FormatStringArrayApi } from "../Shared/FormatStringArrayApi";
 import SweetPagination from "sweetpagination";
-function JobSearchResults({ params }) {
+function JobSearchResults({ queryText, params }) {
   const [searchResult, setSearchResult] = useState(null);
   const [currentPageData, setCurrentPageData] = useState(new Array(2).fill());
   const [inputQuery, setInputQuery] = useState("");
   useEffect(() => {
+    document.getElementById("searchQuery").value = queryText;
     setInputQuery(document.getElementById("searchQuery").value);
-  });
+  }, []);
   useEffect(
     () => {
       let vjestine = [];

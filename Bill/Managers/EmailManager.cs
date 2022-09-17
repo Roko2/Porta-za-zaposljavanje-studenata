@@ -7,6 +7,7 @@ using MimeKit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -40,11 +41,24 @@ namespace Bill.Managers
         private MimeMessage KreirajEmail(EmailPoruka poruka)
         {
             var emailPoruka = new MimeMessage();
+            var builder = new BodyBuilder();
+            byte[] fileBytes;
+            if(poruka.Prilog != null)
+            {
+                var file = poruka.Prilog;
+                using (var ms = new MemoryStream())
+                {
+                    file.CopyTo(ms);
+                    fileBytes = ms.ToArray();
+                }
+                builder.Attachments.Add(file.FileName, fileBytes, MimeKit.ContentType.Parse(MediaTypeNames.Application.Pdf));
+            }
+            builder.HtmlBody = poruka.Sadrzaj;
             emailPoruka.From.Add(new MailboxAddress("roko.kovac@vuv.hr"));
             //primatelj je poslodavac
             emailPoruka.To.AddRange(new List<MailboxAddress>() { new MailboxAddress("rokokovac77@gmail.com") });
             emailPoruka.Subject = poruka.Predmet;
-            emailPoruka.Body = new TextPart(MimeKit.Text.TextFormat.Text) { Text = poruka.Sadrzaj };
+            emailPoruka.Body = builder.ToMessageBody();
             return emailPoruka;
         }
         private async Task Posalji(MimeMessage mailMessage)

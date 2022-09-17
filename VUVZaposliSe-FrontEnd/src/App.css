@@ -133,6 +133,7 @@
   left: 80%;
 }
 .link-active {
+  font-size: 1vw;
   position: relative;
   background: none;
   color: white;
@@ -439,4 +440,7 @@ svg #main-circ {
   100% {
     transform: rotate(360deg) !important;
   }
+}
+#circularProgressJobApply > svg {
+  width: 40px !important;
 }

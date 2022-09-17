@@ -154,7 +154,7 @@ function Favorite() {
               <Alert
                 onClose={handleClose}
                 severity="success"
-                sx={{ width: "100%", fontSize: "0.8vw" }}
+                sx={{ width: "100%", fontSize: 13 }}
               >
                 Posao uspješno dodan u favorite!
               </Alert>
@@ -162,7 +162,7 @@ function Favorite() {
               <Alert
                 onClose={handleClose}
                 severity="info"
-                sx={{ width: "100%", fontSize: "0.8vw" }}
+                sx={{ width: "100%", fontSize: 13 }}
               >
                 Posao uspješno obrisan iz favorita!
               </Alert>

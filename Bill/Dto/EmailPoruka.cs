@@ -1,4 +1,5 @@
-﻿using MimeKit;
+﻿using Microsoft.AspNetCore.Http;
+using MimeKit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,11 +13,6 @@ namespace Bill.Dto
         public string Primatelj { get; set; }
         public string Predmet { get; set; }
         public string Sadrzaj { get; set; }
-        public EmailPoruka(string primatelj, string predmet, string sadrzaj)
-        {
-            Primatelj = primatelj;
-            Predmet = predmet;
-            Sadrzaj = sadrzaj;
-        }
+        public IFormFile Prilog { get; set; }
     }
 }

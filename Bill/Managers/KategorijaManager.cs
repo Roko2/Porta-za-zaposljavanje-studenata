@@ -109,7 +109,7 @@ namespace Bill.Managers
                         } while (nasumicnoOdabraneKategorije.Contains(randomKategorijaId));
                         nasumicnoOdabraneKategorije.Add(randomKategorijaId);
                         poslovi.AddRange(await _posaoManager.DohvatiSvePoslovePoKategoriji(randomKategorijaId));
-                        kategorijePoslovi.Add(Tuple.Create(await DohvatiKategorijuPoId(randomKategorijaId), poslovi.ToList()));
+                        kategorijePoslovi.Add(Tuple.Create(await DohvatiKategorijuPoId(randomKategorijaId), poslovi.Take(3).ToList()));
                         poslovi.Clear();
                     }
                     kategorijePoslovi.OrderByDescending(x => x.Item2);
@@ -121,12 +121,13 @@ namespace Bill.Managers
                     foreach (var kategorija in brojKategorija)
                     {
                         poslovi.AddRange(await _posaoManager.DohvatiSvePoslovePoKategoriji(kategorija.Name));
-                        kategorijePoslovi.Add(Tuple.Create(await DohvatiKategorijuPoId(kategorija.Name), poslovi.ToList()));
+                        kategorijePoslovi.Add(Tuple.Create(await DohvatiKategorijuPoId(kategorija.Name), poslovi.Take(3).ToList()));
                         poslovi.Clear();
                     }
 
                     var kategorijaIdKojaNijeOdabrana = kategorije.Where(x => !brojKategorija.Select(y => y.Name).ToList().Contains(x.Id)).First().Id;
-                    kategorijePoslovi.Add(Tuple.Create(await DohvatiKategorijuPoId(kategorijaIdKojaNijeOdabrana), await _posaoManager.DohvatiSvePoslovePoKategoriji(kategorijaIdKojaNijeOdabrana)));
+                    var posloviKategorijeKojaNijeOdabrana = await _posaoManager.DohvatiSvePoslovePoKategoriji(kategorijaIdKojaNijeOdabrana);
+                    kategorijePoslovi.Add(Tuple.Create(await DohvatiKategorijuPoId(kategorijaIdKojaNijeOdabrana), posloviKategorijeKojaNijeOdabrana.Take(3).ToList()));
                     kategorijePoslovi.OrderByDescending(x => x.Item2);
                 }
                 else
@@ -137,7 +138,7 @@ namespace Bill.Managers
                         if (item.index < 3)
                         {
                             poslovi.AddRange(await _posaoManager.DohvatiSvePoslovePoKategoriji(item.value.Name));
-                            kategorijePoslovi.Add(Tuple.Create(await DohvatiKategorijuPoId(item.value.Name), poslovi.ToList()));
+                            kategorijePoslovi.Add(Tuple.Create(await DohvatiKategorijuPoId(item.value.Name), poslovi.Take(3).ToList()));
                             poslovi.Clear();
                         }
                     }
