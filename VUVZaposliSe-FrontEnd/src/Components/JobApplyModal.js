@@ -59,11 +59,11 @@ export default function JobApplyModal() {
       data.append("primatelj", "da");
       data.append("predmet", "Prijavnica za posao");
       let preparedContent =
-        "<p>Poštovani, <br><br>u privitku Vam šaljem CV za svrhu prijave za posao.<br><br>Lijep pozdrav, <br><br> " +
+        "<p>Poštovani, <br><br>student " +
         ime +
         " " +
         prezime +
-        "</p>";
+        " u privitku Vam šalje CV za svrhu prijave za posao.<br><br>Lijep pozdrav, <br><br>Web portal 'Zaposli se'.</p>";
       data.append("sadrzaj", preparedContent);
       try {
         const res = await axios.post(

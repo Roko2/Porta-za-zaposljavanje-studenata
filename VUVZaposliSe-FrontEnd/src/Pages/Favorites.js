@@ -1,6 +1,7 @@
 import { CircularProgress, Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import JobCard from "../Components/JobCard";
+import { ChoiceRemember } from "../Shared/ChoiceRemember";
 
 function Favorites() {
   const [data, setData] = useState(null);
@@ -21,6 +22,9 @@ function Favorites() {
       .catch((err) => console.error(err));
   }, []);
   if (data != null && data.length > 0) {
+    data.forEach((element) => {
+      ChoiceRemember(element.posaoId);
+    });
     return (
       <>
         <Typography variant="h3" sx={{ mx: "auto", mt: 2 }}>

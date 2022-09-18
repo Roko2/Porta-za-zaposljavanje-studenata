@@ -19,7 +19,7 @@ namespace Dal.Queries
                                                .Include(x => x.Poslodavac)
                                                .Include(x => x.Vjestine)
                                                .Include(x => x.Pogodnosti)
-                                               .Select(x => x).ToListAsync();
+                                               .Select(x => x).Where(x=>x.Aktivan==true).ToListAsync();
             }
             catch (Exception ex)
             {
@@ -35,7 +35,7 @@ namespace Dal.Queries
                                                .Include(x => x.Poslodavac)
                                                .Include(x => x.Vjestine)
                                                .Include(x => x.Pogodnosti)
-                                               .Where(x => x.Kategorija.KategorijaId == kategorijaId).ToListAsync();
+                                               .Where(x => x.Kategorija.KategorijaId == kategorijaId && x.Aktivan == true).ToListAsync();
             }
             catch (Exception ex)
             {
@@ -82,7 +82,7 @@ namespace Dal.Queries
                                                .Include(x => x.Vjestine)
                                                .Include(x => x.Pogodnosti)
                                                .Include(x=>x.Grad)
-                                               .Select(x => x).ToListAsync();
+                                               .Select(x => x).Where(x=>x.Aktivan==true).ToListAsync();
                 if(svojstva == null) {
                     return poslovi;
                 }

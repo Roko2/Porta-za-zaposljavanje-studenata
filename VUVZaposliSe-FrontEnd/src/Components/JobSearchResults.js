@@ -6,15 +6,16 @@ import { FormatStringArrayApi } from "../Shared/FormatStringArrayApi";
 import Pagination from "@mui/material/Pagination";
 function JobSearchResults({ queryText, params }) {
   const [searchResult, setSearchResult] = useState(null);
-  const [inputQuery, setInputQuery] = useState("");
+  const [inputQuery, setInputQuery] = useState(queryText);
+  const [pageNumber, setPageNumber] = useState(1);
   const [activePage, setActivePage] = useState(null);
-  function handlePageChange(e) {
-    var pageNumber = e.target.innerHTML[0];
-    var showDataNumber = parseInt(pageNumber) * 9;
-
-    if (parseInt(pageNumber) == 1) {
+  const handlePageChange = (e, value) => {
+    var pageNumber = value;
+    var showDataNumber = value * 9;
+    setPageNumber(value);
+    if (pageNumber == 1) {
       setActivePage(searchResult.slice(0, 9));
-    } else if (parseInt(pageNumber) == Math.floor(searchResult.length / 9)) {
+    } else if (pageNumber == Math.floor(searchResult.length / 9)) {
       if (searchResult.length % 9 == 0) {
         setActivePage(
           searchResult.slice(searchResult.length - 9, searchResult.length)
@@ -31,7 +32,7 @@ function JobSearchResults({ queryText, params }) {
     } else {
       setActivePage(searchResult.slice(showDataNumber, showDataNumber + 9));
     }
-  }
+  };
   useEffect(() => {
     setInputQuery(queryText);
   }, [queryText]);
@@ -133,7 +134,8 @@ function JobSearchResults({ queryText, params }) {
               }
               color="primary"
               size="large"
-              onChange={(e) => handlePageChange(e)}
+              page={pageNumber}
+              onChange={handlePageChange}
             />
           </Grid>
         </Grid>
