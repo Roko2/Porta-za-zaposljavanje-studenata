@@ -45,47 +45,47 @@ function Home() {
 
     const clientSecret = "695be4306e9e825884177d9af5a8c16620e0aa52a7";
     const clientId = "73c99510-612e-40ee-af34-6658a87886fe";
-    let tempKey = localStorage.getItem("tempKey");
-    var url = window.location.href;
-    var token = null;
-    if (localStorage.getItem("data") == null) {
-      token = url.split("id_token=")[1];
-    } else {
-      token = JSON.parse(localStorage.getItem("data"))?.signature;
-      if (token == null || token == undefined) {
-        localStorage.clear();
-        window.location.href = "https://localhost:3000/login";
-      }
-    }
-    if (token != undefined || token != "" || token != null) {
-      let decodedUser = jwt_decode(token);
-      let decodedSignature = token;
-      var data = { user: decodedUser, signature: decodedSignature };
-      if (decodedUser.nonce == tempKey) {
-        localStorage.setItem("data", JSON.stringify(data));
-        var userToAdd = JSON.parse(localStorage.getItem("data"));
-        userToAdd = userToAdd.user;
-        let korisnik = {
-          ime: userToAdd.given_name,
-          prezime: userToAdd.family_name,
-          email: userToAdd.preferred_username,
-          adresa: userToAdd.address.locality,
-          sub: userToAdd.sub,
-        };
-        korisnik = JSON.stringify(korisnik);
-        fetch("https://localhost:7137/DodajNovogKorisnika", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: korisnik,
-        })
-          .then((res) => res)
-          .catch((err) => console.error(err));
-      }
-    } else {
-      localStorage.clear();
-    }
+  //   let tempKey = localStorage.getItem("tempKey");
+  //   var url = window.location.href;
+  //   var token = null;
+  //   if (localStorage.getItem("data") == null) {
+  //     token = url.split("id_token=")[1];
+  //   } else {
+  //     token = JSON.parse(localStorage.getItem("data"))?.signature;
+  //     if (token == null || token == undefined) {
+  //       localStorage.clear();
+  //       window.location.href = "https://localhost:3000/login";
+  //     }
+  //   }
+  //   if (token != undefined || token != "" || token != null) {
+  //     let decodedUser = jwt_decode(token);
+  //     let decodedSignature = token;
+  //     var data = { user: decodedUser, signature: decodedSignature };
+  //     if (decodedUser.nonce == tempKey) {
+  //       localStorage.setItem("data", JSON.stringify(data));
+  //       var userToAdd = JSON.parse(localStorage.getItem("data"));
+  //       userToAdd = userToAdd.user;
+  //       let korisnik = {
+  //         ime: userToAdd.given_name,
+  //         prezime: userToAdd.family_name,
+  //         email: userToAdd.preferred_username,
+  //         adresa: userToAdd.address.locality,
+  //         sub: userToAdd.sub,
+  //       };
+  //       korisnik = JSON.stringify(korisnik);
+  //       fetch("https://localhost:7137/DodajNovogKorisnika", {
+  //         method: "POST",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: korisnik,
+  //       })
+  //         .then((res) => res)
+  //         .catch((err) => console.error(err));
+  //     }
+  //   } else {
+  //     localStorage.clear();
+  //   }
   }, []);
   return (
     <>

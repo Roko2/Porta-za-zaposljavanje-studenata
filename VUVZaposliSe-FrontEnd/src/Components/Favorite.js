@@ -20,36 +20,36 @@ function Favorite() {
   };
   function handleChange(e) {
     setChecked(e.target.checked);
-    fetch(
-      "https://localhost:7137/Korisnik/" +
-        JSON.parse(localStorage.getItem("data")).user.sub
-    )
-      .then((res) => res.json())
-      .then((res) => {
-        setUserId(res);
-      })
-      .catch((err) => console.error(err));
+    // fetch(
+    //   "https://localhost:7137/Korisnik/" +
+    //     JSON.parse(localStorage.getItem("data")).user.sub
+    // )
+    //   .then((res) => res.json())
+    //   .then((res) => {
+    //     setUserId(res);
+    //   })
+    //   .catch((err) => console.error(err));
   }
   useEffect(() => {
-    fetch(
-      "https://localhost:7137/Korisnik/" +
-        JSON.parse(localStorage.getItem("data")).user.sub
-    )
-      .then((res) => res.json())
-      .then((res) => {
-        fetch(
-          "https://localhost:7137/PosaoIsFavorit?PosaoId=" +
-            window.location.pathname.split("/").pop() +
-            "&KorisnikId=" +
-            res
-        )
-          .then((res) => res.json())
-          .then((res) => {
-            document.getElementById("checkbox").checked = res;
-          })
-          .catch((err) => console.error(err));
-      })
-      .catch((err) => console.error(err));
+    // fetch(
+    //   "https://localhost:7137/Korisnik/" +
+    //     JSON.parse(localStorage.getItem("data")).user.sub
+    // )
+    //   .then((res) => res.json())
+    //   .then((res) => {
+    //     fetch(
+    //       "https://localhost:7137/PosaoIsFavorit?PosaoId=" +
+    //         window.location.pathname.split("/").pop() +
+    //         "&KorisnikId=" +
+    //         res
+    //     )
+    //       .then((res) => res.json())
+    //       .then((res) => {
+    //         document.getElementById("checkbox").checked = res;
+    //       })
+    //       .catch((err) => console.error(err));
+    //   })
+    //   .catch((err) => console.error(err));
   }, []);
   useEffect(() => {
     if (userId != null) {

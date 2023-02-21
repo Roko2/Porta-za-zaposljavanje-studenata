@@ -14,11 +14,11 @@ import Favorites from "./Pages/Favorites";
 function App() {
   return (
     <Routes>
-      <Route exact path="/" element={<Login />} />
-      <Route index path="login" element={<Login />} />
+      {/* <Route exact path="/" element={<AppLayout />} /> */}
+      {/* <Route index path="" element={<Login />} /> */}
       <Route path="*" element={<NoMatch />} />
       <Route element={<AppLayout />}>
-        <Route path="home" element={<Home />} />
+        <Route index exact path="/" element={<Home />} />
         <Route path="aboutus" element={<AboutUs />} />
         <Route path="userprofile" element={<UserProfile />} />
         <Route path="jobads" element={<JobAds />} />

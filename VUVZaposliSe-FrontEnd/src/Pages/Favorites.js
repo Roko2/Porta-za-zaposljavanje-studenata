@@ -6,20 +6,20 @@ import { ChoiceRemember } from "../Shared/ChoiceRemember";
 function Favorites() {
   const [data, setData] = useState(null);
   useEffect(() => {
-    fetch(
-      "https://localhost:7137/Korisnik/" +
-        JSON.parse(localStorage.getItem("data")).user.sub
-    )
-      .then((res) => res.json())
-      .then((res) => {
-        fetch("https://localhost:7137/PosloviFavoriti?korisnikId=" + res)
-          .then((res) => res.json())
-          .then((res) => {
-            setData(res);
-          })
-          .catch((err) => console.error(err));
-      })
-      .catch((err) => console.error(err));
+    // fetch(
+    //   "https://localhost:7137/Korisnik/" +
+    //     JSON.parse(localStorage.getItem("data")).user.sub
+    // )
+    //   .then((res) => res.json())
+    //   .then((res) => {
+    //     fetch("https://localhost:7137/PosloviFavoriti?korisnikId=" + res)
+    //       .then((res) => res.json())
+    //       .then((res) => {
+    //         setData(res);
+    //       })
+    //       .catch((err) => console.error(err));
+    //   })
+    //   .catch((err) => console.error(err));
   }, []);
   if (data != null && data.length > 0) {
     data.forEach((element) => {
@@ -38,7 +38,7 @@ function Favorites() {
           style={{ marginTop: "2%", paddingLeft: "5%" }}
           spacing={2}
         >
-          {data.map((posao, index) => (
+          {data != null ? data.map((posao, index) => (
             <Grid key={index} item xs={4}>
               <JobCard
                 key={posao.posaoId}
@@ -48,7 +48,7 @@ function Favorites() {
                 employerId={posao.poslodavac.id}
               ></JobCard>
             </Grid>
-          ))}
+          )) : "Nema podataka"}
         </Grid>
       </>
     );

@@ -57,7 +57,7 @@ function Navigation() {
               className={({ isActive }) =>
                 isActive ? "link-active" : "brk-btn"
               }
-              to="home"
+              to="/"
               style={{
                 display: "flex",
                 justifyContent: "center",
